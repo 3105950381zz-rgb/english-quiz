@@ -78,7 +78,7 @@ async function doLogin() {
   if (pw !== ADMIN_PASSWORD) { alert('密码错误'); return; }
   loggedIn = true;
   try {
-    const res = await fetch('/api/submissions');
+    const res = await fetch('https://english-quiz-vercel.vercel.app/api/submissions');
     data = await res.json();
   } catch(e) { data = []; }
   S.style.display = 'flex';

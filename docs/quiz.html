@@ -107,7 +107,7 @@ const A = document.getElementById('app');
 
 async function saveResult(data) {
   try {
-    const res = await fetch('/api/submissions', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) });
+    const res = await fetch('https://english-quiz-vercel.vercel.app/api/submissions', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) });
     return await res.json();
   } catch(e) { return { success: false }; }
 }
