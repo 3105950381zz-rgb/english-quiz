@@ -3,129 +3,105 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>英语测试 - 管理后台</title>
+<title>管理后台 · 英语测评</title>
 <style>
+:root{--bg:#f2f4f8;--card:#fff;--text:#1a1d26;--text2:#6b7280;--text3:#9ca3af;--accent:#4f46e5;--accent2:#7c3aed;--border:rgba(0,0,0,.04)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f1f5f9;color:#1a2332;min-height:100vh}
-.hd{background:linear-gradient(135deg,#1a2332,#334155);padding:20px 20px 16px;color:#fff}
-.hd h1{font-size:18px;font-weight:800;letter-spacing:.5px}
-.hd p{font-size:11px;color:rgba(255,255,255,.5);margin-top:3px}
-.hd .stats{display:flex;gap:20px;margin-top:12px}
-.hd .stat{font-size:11px;color:rgba(255,255,255,.7)}
-.hd .stat b{font-size:22px;display:block;color:#fff}
-.login{max-width:360px;margin:60px auto;padding:0 14px}
-.login-card{background:#fff;border-radius:16px;padding:28px 20px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.login-card h2{font-size:17px;font-weight:700;margin-bottom:4px}
-.login-card p{font-size:12px;color:#64748b;margin-bottom:16px}
-.login-card input{width:100%;padding:11px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;outline:none;margin-bottom:10px;font-family:inherit}
-.login-card input:focus{border-color:#3b82f6}
-.login-card .btn{width:100%;padding:11px;border:none;border-radius:8px;background:#1a56db;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
-.ct{max-width:800px;margin:0 auto;padding:14px}
-.toolbar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
-.toolbar input{padding:9px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:13px;outline:none;flex:1;min-width:140px;font-family:inherit}
-.toolbar input:focus{border-color:#3b82f6}
-.toolbar .btn{padding:9px 16px;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s}
+body{font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+.bg-shape{position:fixed;z-index:-1;border-radius:50%;filter:blur(80px);opacity:.3;pointer-events:none}
+.bg-shape.s1{width:350px;height:350px;background:linear-gradient(135deg,#4f46e5,#7c3aed);top:-100px;left:-60px;animation:f1 20s ease-in-out infinite}
+.bg-shape.s2{width:250px;height:250px;background:linear-gradient(135deg,#f59e0b,#f97316);bottom:-40px;right:-40px;animation:f2 25s ease-in-out infinite}
+@keyframes f1{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-30px)}}
+@keyframes f2{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,40px)}}
+.hd{background:linear-gradient(135deg,#1a1d26,#2d2f39);padding:28px 20px 22px;position:relative;overflow:hidden}
+.hd::before{content:'';position:absolute;top:-60px;right:-20px;width:200px;height:200px;border-radius:50%;background:rgba(79,70,229,.08)}
+.hd h1{font-size:17px;font-weight:800;letter-spacing:-.3px;color:#fff}
+.hd p{font-size:11px;color:rgba(255,255,255,.35);margin-top:2px}
+.hd .stats{display:flex;gap:20px;margin-top:14px}
+.hd .stat{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.3px}
+.hd .stat b{font-size:20px;display:block;color:#fff;font-weight:800;margin-bottom:1px}
+.login-wrap{max-width:360px;margin:80px auto;padding:0 16px}
+.login-card{background:rgba(255,255,255,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:32px 24px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.04)}
+.login-card h2{font-size:16px;font-weight:700;margin-bottom:2px}
+.login-card p{font-size:11px;color:var(--text2);margin-bottom:16px}
+.login-card input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;outline:none;margin-bottom:10px;font-family:inherit;background:rgba(0,0,0,.01)}
+.login-card input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,70,229,.06)}
+.login-card .btn{width:100%;padding:10px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+.login-card .btn:active{transform:scale(.97)}
+.ct{max-width:800px;margin:0 auto;padding:14px 16px 30px}
+.toolbar{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.toolbar input{padding:8px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;outline:none;flex:1;min-width:140px;font-family:inherit;background:rgba(0,0,0,.01)}
+.toolbar input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,70,229,.06)}
+.toolbar .btn{padding:8px 14px;border:none;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
 .toolbar .btn:active{transform:scale(.97)}
-.toolbar .btn-primary{background:#1a56db;color:#fff}
-.toolbar .btn-second{background:#e2e8f0;color:#475569}
-.table-wrap{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th{text-align:left;padding:10px 12px;background:#f8fafc;color:#64748b;font-weight:600;font-size:11px;border-bottom:1px solid #e2e8f0;white-space:nowrap}
-td{padding:10px 12px;border-bottom:1px solid #f1f5f9;color:#334155}
-tr:hover td{background:#f8fafc}
+.toolbar .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+.toolbar .btn-second{background:#e5e7eb;color:#374151}
+.table-wrap{background:rgba(255,255,255,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.5);border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.03)}
+table{width:100%;border-collapse:collapse;font-size:11px}
+th{text-align:left;padding:10px 12px;background:rgba(0,0,0,.015);color:var(--text3);font-weight:600;font-size:10px;border-bottom:1px solid var(--border);letter-spacing:.3px;text-transform:uppercase}
+td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text)}
 tr:last-child td{border-bottom:none}
-.badge{padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600}
-.badge-high{background:#dbeafe;color:#1d4ed8}
-.badge-mid{background:#d1fae5;color:#065f46}
-.badge-low{background:#fef3c7;color:#92400e}
-.badge-poor{background:#fee2e2;color:#991b1b}
-.badge-paid{background:#d1fae5;color:#065f46}
-.badge-unpaid{background:#f1f5f9;color:#64748b}
-.empty-state{text-align:center;padding:40px 20px;color:#94a3b8;font-size:13px}
-.empty-state .empty-icon{font-size:40px;margin-bottom:8px;display:block}
-@media(max-width:600px){.hd .stats{gap:12px}.hd .stat b{font-size:18px}table{font-size:11px}th,td{padding:8px 8px}.toolbar{flex-direction:column}.toolbar input{min-width:auto}}
+tr:hover td{background:rgba(79,70,229,.015)}
+.badge{padding:2px 7px;border-radius:4px;font-size:9px;font-weight:600}
+.badge-high{background:rgba(16,185,129,.08);color:#10b981}
+.badge-mid{background:rgba(79,70,229,.06);color:var(--accent)}
+.badge-low{background:rgba(245,158,11,.08);color:#b45309}
+.badge-poor{background:rgba(239,68,68,.06);color:#ef4444}
+.badge-paid{background:rgba(16,185,129,.08);color:#10b981}
+.badge-unpaid{background:rgba(0,0,0,.03);color:var(--text3)}
+.empty-state{text-align:center;padding:40px 20px;color:var(--text3);font-size:12px}
+.empty-state .empty-icon{font-size:36px;margin-bottom:6px;display:block}
+@media(max-width:600px){.hd .stats{gap:12px}.hd .stat b{font-size:18px}table{font-size:10px}th,td{padding:7px 6px}.toolbar{flex-direction:column}.toolbar input{min-width:auto}}
 </style>
 </head>
 <body>
+<div class="bg-shape s1"></div>
+<div class="bg-shape s2"></div>
 <div class="hd">
-  <h1>🔐 英语测试管理后台</h1>
-  <p>查看学员答题记录</p>
+  <h1>🔐 管理后台</h1>
+  <p>英语测评 · 学员数据看板</p>
   <div class="stats" id="stats" style="display:none">
-    <div class="stat"><b id="totalCount">0</b>总答题数</div>
-    <div class="stat"><b id="avgScore">0</b>平均分</div>
-    <div class="stat"><b id="paidCount">0</b>付费人数</div>
+    <div class="stat"><b id="t">0</b>总答题</div>
+    <div class="stat"><b id="a">0</b>平均分</div>
+    <div class="stat"><b id="p">0</b>已付费</div>
   </div>
 </div>
 <div class="ct" id="app"></div>
 <script>
-const ADMIN_PASSWORD = 'admin888';
-let loggedIn = false, data = [], filtered = [];
-const A = document.getElementById('app');
-const S = document.getElementById('stats');
+const PW='admin888';
+let ok=false,d=[],fd=[];
+const A=document.getElementById('app'),S=document.getElementById('stats');
 
-function login() {
-  A.innerHTML = `<div class="login"><div class="login-card">
-    <div style="font-size:36px;margin-bottom:6px">🔐</div>
-    <h2>管理员登录</h2>
-    <p>请输入密码查看学员数据</p>
-    <input type="password" id="pwInput" placeholder="请输入管理密码" onkeydown="if(event.key==='Enter')doLogin()"/>
-    <button class="btn" onclick="doLogin()">登录</button>
-  </div></div>`;
+function lg(){
+  A.innerHTML='<div class="login-wrap"><div class="login-card"><div style="font-size:32px;margin-bottom:4px">🔐</div><h2>管理员登录</h2><p>输入密码查看学员数据</p><input type="password" id="pw" placeholder="请输入管理密码" onkeydown="if(event.key===\'Enter\')dl()"/><button class="btn" onclick="dl()">登录</button></div></div>';
 }
 
-async function doLogin() {
-  const pw = document.getElementById('pwInput')?.value;
-  if (pw !== ADMIN_PASSWORD) { alert('密码错误'); return; }
-  loggedIn = true;
-  try {
-    const res = await fetch('https://english-quiz-vercel.vercel.app/api/submissions');
-    data = await res.json();
-  } catch(e) { data = []; }
-  S.style.display = 'flex';
-  render();
+async function dl(){
+  if(document.getElementById('pw')?.value!==PW){alert('密码错误');return;}
+  ok=true;
+  try{const r=await fetch('https://english-quiz-vercel.vercel.app/api/submissions');d=await r.json();}catch(e){d=[]}
+  S.style.display='flex';r();
 }
 
-function render() {
-  const q = (document.getElementById('searchInput')?.value || '').toLowerCase();
-  filtered = data.filter(d => d.name.toLowerCase().includes(q));
-  document.getElementById('totalCount').textContent = data.length;
-  const avg = data.length ? Math.round(data.reduce((s,d) => s + d.score, 0) / data.length * 10) / 10 : 0;
-  document.getElementById('avgScore').textContent = avg;
-  document.getElementById('paidCount').textContent = data.filter(d => d.paid).length;
-
-  if (!filtered.length) {
-    A.innerHTML = `<div class="table-wrap"><div class="empty-state"><span class="empty-icon">📋</span>${data.length === 0 ? '还没有学员答题记录' : '没有匹配的记录'}</div></div>`;
-    return;
-  }
-
-  A.innerHTML = `<div class="toolbar">
-    <input type="text" id="searchInput" placeholder="🔍 搜索学员姓名..." oninput="render()"/>
-    <button class="btn btn-second" onclick="exportCSV()">📥 导出CSV</button>
-    <button class="btn btn-primary" onclick="doLogin()">🔄 刷新</button>
-  </div>
-  <div class="table-wrap"><table>
-    <thead><tr><th>ID</th><th>姓名</th><th>分数</th><th>正确率</th><th>付费状态</th><th>答题时间</th></tr></thead>
-    <tbody>${filtered.map(d => {
-      const pct = Math.round(d.score / d.total * 100);
-      let bc = pct>=80?'badge-high':pct>=60?'badge-mid':pct>=40?'badge-low':'badge-poor';
-      let lb = pct>=80?'优秀':pct>=60?'良好':pct>=40?'待提高':'薄弱';
-      const pb = d.paid ? '<span class="badge badge-paid">已付费</span>' : '<span class="badge badge-unpaid">未付费</span>';
-      const t = new Date(d.created_at).toLocaleString('zh-CN',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
-      return `<tr><td><strong>${d.id}</strong></td><td>${d.name}</td><td>${d.score}/${d.total} <span class="badge ${bc}">${lb}</span></td><td>${pct}%</td><td>${pb}</td><td>${t}</td></tr>`;
-    }).join('')}</tbody>
-  </table><div style="padding:8px 12px;background:#f8fafc;font-size:10px;color:#94a3b8;text-align:right">共 ${filtered.length} 条记录</div></div>`;
+function r(){
+  const q=(document.getElementById('s')?.value||'').toLowerCase();
+  fd=d.filter(x=>x.name.toLowerCase().includes(q));
+  document.getElementById('t').textContent=d.length;
+  document.getElementById('a').textContent=d.length?Math.round(d.reduce((s,x)=>s+x.score,0)/d.length*10)/10:0;
+  document.getElementById('p').textContent=d.filter(x=>x.paid).length;
+  if(!fd.length){A.innerHTML='<div class="table-wrap"><div class="empty-state"><span class="empty-icon">📋</span>'+(d.length===0?'还没有学员答题':'没有匹配的记录')+'</div></div>';return;}
+  A.innerHTML='<div class="toolbar"><input type="text" id="s" placeholder="🔍 搜索姓名..." oninput="r()" value="'+q+'"/><button class="btn btn-second" onclick="ex()">📥 导出CSV</button><button class="btn btn-primary" onclick="dl()">🔄 刷新</button></div><div class="table-wrap"><table><thead><tr><th>ID</th><th>姓名</th><th>分数</th><th>正确率</th><th>付费</th><th>时间</th></tr></thead><tbody>'+fd.map(x=>{const p=Math.round(x.score/x.total*100);let bc=p>=80?'badge-high':p>=60?'badge-mid':p>=40?'badge-low':'badge-poor',lb=p>=80?'优秀':p>=60?'良好':p>=40?'待提高':'薄弱',pb=x.paid?'<span class="badge badge-paid">已付费</span>':'<span class="badge badge-unpaid">未付费</span>',t=new Date(x.created_at).toLocaleString('zh-CN',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});return '<tr><td><strong>'+x.id+'</strong></td><td>'+x.name+'</td><td>'+x.score+'/'+x.total+' <span class="badge '+bc+'">'+lb+'</span></td><td>'+p+'%</td><td>'+pb+'</td><td>'+t+'</td></tr>';}).join('')+'</tbody></table><div style="padding:6px 12px;background:rgba(0,0,0,.01);font-size:9px;color:var(--text3);text-align:right">共 '+fd.length+' 条记录</div></div>';
+  document.getElementById('s')?.focus();
 }
 
-function exportCSV() {
-  const rows = filtered.map(d => [d.id, d.name, d.score, d.total, Math.round(d.score/d.total*100)+'%', d.paid?'是':'否', new Date(d.created_at).toLocaleString('zh-CN')]);
-  const csv = 'ID,姓名,分数,总分,正确率,付费,答题时间\n' + rows.map(r => r.join(',')).join('\n');
-  const blob = new Blob(['﻿' + csv], {type:'text/csv;charset=utf-8;'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href = url; a.download = '英语测评数据_'+new Date().toISOString().slice(0,10)+'.csv';
-  a.click(); URL.revokeObjectURL(url);
+function ex(){
+  const rows=fd.map(x=>[x.id,x.name,x.score,x.total,Math.round(x.score/x.total*100)+'%',x.paid?'是':'否',new Date(x.created_at).toLocaleString('zh-CN')]);
+  const csv='ID,姓名,分数,总分,正确率,付费,答题时间\n'+rows.map(r=>r.join(',')).join('\n');
+  const b=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8;'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='数据_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();URL.revokeObjectURL(a);
 }
-
-login();
+lg();
 </script>
 </body>
 </html>

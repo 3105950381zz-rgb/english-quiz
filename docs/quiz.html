@@ -6,83 +6,123 @@
 <meta name="description" content="英语能力水平测试 - 10分钟测出你的英语水平">
 <title>英语能力水平测试</title>
 <style>
+:root{--bg:#f2f4f8;--card:#fff;--text:#1a1d26;--text2:#6b7280;--text3:#9ca3af;--accent:#4f46e5;--accent2:#7c3aed;--gold:#f59e0b;--green:#10b981;--red:#ef4444;--border:rgba(0,0,0,.04);--shadow:0 4px 24px rgba(0,0,0,.04)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'PingFang SC','Microsoft YaHei',-apple-system,sans-serif;background:#f0f4f8;color:#1a2332;min-height:100vh;overflow-x:hidden}
-.topbar{background:linear-gradient(135deg,#1a56db,#2563eb);padding:16px 20px 14px;text-align:center;position:relative}
-.topbar .badge{display:inline-block;padding:2px 10px;border-radius:4px;font-size:10px;font-weight:600;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);letter-spacing:1px;margin-bottom:4px}
-.topbar h1{font-size:20px;font-weight:800;color:#fff;letter-spacing:.5px}
-.topbar p{font-size:11px;color:rgba(255,255,255,.6);margin-top:2px}
-.ct{max-width:480px;margin:0 auto;padding:0 14px 30px}
-.card{background:#fff;border-radius:16px;padding:24px 20px;margin-top:14px;box-shadow:0 1px 3px rgba(0,0,0,.04);position:relative}
-.card-hl{position:absolute;top:0;left:16px;right:16px;height:3px;background:linear-gradient(90deg,#1a56db,#3b82f6);border-radius:0 0 4px 4px}
-.home{padding-top:14px}
-.home-icon{font-size:56px;display:block;text-align:center;margin-bottom:4px}
-.home-title{font-size:24px;font-weight:800;text-align:center;color:#1a2332;margin-bottom:4px}
-.home-sub{font-size:13px;text-align:center;color:#64748b;margin-bottom:16px}
-.home-features{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
-.home-feat{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#f8fafc;border-radius:10px;font-size:13px;color:#475569}
-.home-feat .hf-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;background:#e0e7ff;flex-shrink:0}
-.form-group{margin-bottom:14px}
-.form-group label{font-size:12px;font-weight:600;color:#475569;display:block;margin-bottom:5px}
-.form-group input{width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;font-family:inherit;outline:none;transition:all .2s;background:#f8fafc}
-.form-group input:focus{border-color:#3b82f6;background:#fff;box-shadow:0 0 0 3px rgba(59,130,246,.1)}
-.btn{width:100%;padding:13px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}
+body{font-family:Inter,'PingFang SC','Microsoft YaHei',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* Animated BG */
+.bg{position:fixed;inset:0;z-index:-2;background:linear-gradient(160deg,#f2f4f8,#e8ecf4,#f0eef8)}
+.bg-shape{position:fixed;z-index:-1;border-radius:50%;filter:blur(80px);opacity:.35;pointer-events:none}
+.bg-shape.s1{width:400px;height:400px;background:linear-gradient(135deg,#4f46e5,#7c3aed);top:-120px;right:-80px;animation:float1 20s ease-in-out infinite}
+.bg-shape.s2{width:300px;height:300px;background:linear-gradient(135deg,#f59e0b,#f97316);bottom:-60px;left:-60px;animation:float2 25s ease-in-out infinite}
+.bg-shape.s3{width:200px;height:200px;background:linear-gradient(135deg,#06b6d4,#3b82f6);top:40%;left:60%;animation:float3 18s ease-in-out infinite}
+@keyframes float1{0%,100%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(60px,-40px) rotate(5deg)}}
+@keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,60px) rotate(-3deg)}}
+@keyframes float3{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,30px) rotate(4deg)}}
+
+/* Grid overlay */
+.grid{position:fixed;inset:0;z-index:-1;opacity:.3;pointer-events:none;background-image:linear-gradient(rgba(79,70,229,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(79,70,229,.03) 1px,transparent 1px);background-size:48px 48px}
+
+.ct{max-width:420px;margin:0 auto;padding:24px 16px 40px;position:relative}
+
+/* Glass card */
+.glass{background:rgba(255,255,255,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:28px 24px;box-shadow:0 8px 32px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.02);position:relative;overflow:hidden}
+.glass::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.6}
+.glass+.glass{margin-top:12px}
+
+/* Brand bar */
+.brand-bar{text-align:center;margin-bottom:24px;padding:8px 0}
+.brand-bar .badge{display:inline-flex;align-items:center;gap:4px;padding:4px 14px;border-radius:999px;font-size:10px;font-weight:600;background:rgba(79,70,229,.06);color:var(--accent);letter-spacing:.5px;border:1px solid rgba(79,70,229,.08);margin-bottom:10px}
+.brand-bar h1{font-size:22px;font-weight:800;letter-spacing:-.3px;background:linear-gradient(135deg,#1a1d26,#4f46e5);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.brand-bar p{font-size:12px;color:var(--text2);margin-top:3px;font-weight:400}
+
+/* Home */
+.home-icon{font-size:48px;display:block;text-align:center;margin-bottom:6px}
+.home-title{font-size:20px;font-weight:700;text-align:center;margin-bottom:2px}
+.home-sub{font-size:12px;text-align:center;color:var(--text2);margin-bottom:16px;font-weight:400}
+.features{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.feat{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(0,0,0,.015);border-radius:10px;font-size:12px;color:var(--text);border:1px solid var(--border)}
+.feat .fi-icon{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;background:rgba(79,70,229,.06);flex-shrink:0}
+
+.form-group{margin-bottom:12px}
+.form-group label{font-size:11px;font-weight:600;color:var(--text2);display:block;margin-bottom:4px;letter-spacing:.3px}
+.form-group input{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:inherit;outline:none;transition:all .2s;background:rgba(0,0,0,.015)}
+.form-group input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,70,229,.08);background:#fff}
+
+.btn{width:100%;padding:12px;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:6px}
 .btn:active{transform:scale(.97)}
-.btn-primary{background:linear-gradient(135deg,#1a56db,#3b82f6);color:#fff;box-shadow:0 4px 14px rgba(59,130,246,.25)}
-.btn-second{background:#f1f5f9;color:#475569;border:1px solid #e2e8f0}
-.q-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.q-num{font-size:11px;font-weight:600;color:#64748b;background:#f1f5f9;padding:3px 10px;border-radius:6px}
-.q-progress{height:4px;background:#e2e8f0;border-radius:2px;overflow:hidden;margin-bottom:14px}
-.q-progress .qp-fill{height:100%;background:linear-gradient(90deg,#1a56db,#3b82f6);border-radius:2px;transition:width .4s ease}
-.q-text{font-size:16px;font-weight:600;color:#1a2332;line-height:1.6;margin-bottom:16px;padding:14px;background:#f8fafc;border-radius:10px;border-left:3px solid #3b82f6}
-.q-opts{display:flex;flex-direction:column;gap:8px}
-.q-opt{width:100%;padding:13px 14px;border:1.5px solid #e2e8f0;border-radius:10px;background:#fff;font-size:14px;color:#334155;cursor:pointer;text-align:left;font-family:inherit;transition:all .2s;line-height:1.5}
-.q-opt:hover{border-color:#93c5fd;background:#f0f7ff}
-.q-opt:active{transform:scale(.97)}
-.q-opt .ql{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:6px;font-size:11px;font-weight:700;margin-right:10px;color:#fff;background:#94a3b8}
-.q-opt.selected{border-color:#3b82f6;background:#eff6ff}
-.q-opt.selected .ql{background:#3b82f6}
-.q-opt.correct{border-color:#10b981;background:#f0fdf4}
-.q-opt.correct .ql{background:#10b981}
-.q-opt.wrong{border-color:#ef4444;background:#fef2f2}
-.q-opt.wrong .ql{background:#ef4444}
-.result{text-align:center;padding-top:4px}
-.r-score{font-size:56px;font-weight:800;background:linear-gradient(135deg,#1a56db,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
-.r-score-label{font-size:12px;color:#64748b;margin-top:2px}
-.r-badge{display:inline-block;padding:4px 16px;border-radius:20px;font-size:13px;font-weight:700;margin:8px 0}
-.r-level-A{background:#dbeafe;color:#1d4ed8}
-.r-level-B{background:#d1fae5;color:#065f46}
-.r-level-C{background:#fef3c7;color:#92400e}
-.r-level-D{background:#fee2e2;color:#991b1b}
-.r-detail{text-align:left;padding:14px;background:#f8fafc;border-radius:10px;margin:12px 0}
-.r-detail h4{font-size:13px;color:#1a2332;margin-bottom:8px}
-.r-detail p{font-size:12px;color:#64748b;line-height:1.7}
-.lead-card{background:linear-gradient(135deg,#1a56db,#1e40af);border-radius:14px;padding:18px 16px;margin-top:14px;text-align:center;color:#fff}
-.lead-card .lc-title{font-size:15px;font-weight:700;margin-bottom:4px}
-.lead-card .lc-sub{font-size:11px;color:rgba(255,255,255,.7);margin-bottom:12px}
-.lead-qr-row{display:flex;gap:16px;justify-content:center;align-items:center}
-.lead-qr{width:80px;height:80px;border-radius:8px;overflow:hidden;border:2px solid rgba(255,255,255,.2)}
-.lead-qr img{width:100%;height:100%;object-fit:cover;display:block}
-.lead-qr-label{font-size:9px;color:rgba(255,255,255,.5);margin-top:4px}
-.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);padding:10px 20px;border-radius:10px;background:#1a2332;font-size:13px;color:#fff;box-shadow:0 4px 20px rgba(0,0,0,.15);z-index:999;opacity:0;transition:all .4s;pointer-events:none;white-space:nowrap}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 16px rgba(79,70,229,.25)}
+.btn-primary:hover{box-shadow:0 6px 24px rgba(79,70,229,.35);transform:translateY(-1px)}
+.btn-second{background:rgba(0,0,0,.02);color:var(--text2);border:1px solid var(--border)}
+.btn-second:hover{background:rgba(0,0,0,.04)}
+
+/* Quiz */
+.q-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.q-num{font-size:10px;font-weight:600;color:var(--text3);background:rgba(0,0,0,.025);padding:3px 10px;border-radius:6px;letter-spacing:.3px}
+.q-progress{height:3px;background:rgba(0,0,0,.04);border-radius:2px;overflow:hidden;margin-bottom:14px}
+.q-progress .qp-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:2px;transition:width .5s ease}
+.q-text{font-size:14px;font-weight:600;color:var(--text);line-height:1.7;margin-bottom:14px;padding:12px 14px;background:rgba(79,70,229,.02);border-radius:10px;border-left:2.5px solid var(--accent)}
+.q-opts{display:flex;flex-direction:column;gap:6px}
+.q-opt{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;background:rgba(255,255,255,.5);font-size:13px;color:var(--text);cursor:pointer;text-align:left;font-family:inherit;transition:all .2s;line-height:1.5}
+.q-opt:hover{border-color:rgba(79,70,229,.2);background:rgba(79,70,229,.02)}
+.q-opt .ql{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;font-size:10px;font-weight:700;margin-right:10px;color:#fff;background:#d1d5db;transition:all .2s}
+.q-opt.correct{border-color:var(--green);background:rgba(16,185,129,.04)}
+.q-opt.correct .ql{background:var(--green)}
+.q-opt.wrong{border-color:var(--red);background:rgba(239,68,68,.04)}
+.q-opt.wrong .ql{background:var(--red)}
+
+/* Result */
+.result{text-align:center}
+.r-score-wrap{display:inline-flex;align-items:baseline;gap:4px;padding:16px 24px;background:linear-gradient(135deg,rgba(79,70,229,.04),rgba(124,58,237,.04));border-radius:16px;margin:4px auto 10px;border:1px solid rgba(79,70,229,.08)}
+.r-score{font-size:40px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.r-score-label{font-size:11px;color:var(--text3);margin-top:2px}
+.r-badge{display:inline-block;padding:3px 14px;border-radius:999px;font-size:12px;font-weight:700;margin:6px 0 10px}
+.r-level-A{background:rgba(16,185,129,.08);color:var(--green)}
+.r-level-B{background:rgba(79,70,229,.06);color:var(--accent)}
+.r-level-C{background:rgba(245,158,11,.08);color:#b45309}
+.r-level-D{background:rgba(239,68,68,.06);color:var(--red)}
+.r-detail{text-align:left;padding:14px;background:rgba(0,0,0,.01);border-radius:10px;margin:10px 0;border:1px solid var(--border)}
+.r-detail h4{font-size:12px;font-weight:700;margin-bottom:5px;display:flex;align-items:center;gap:4px}
+.r-detail p{font-size:11px;color:var(--text2);line-height:1.7}
+
+/* Pay card */
+.pay-card{background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:14px;padding:16px;margin:10px 0;text-align:center;border:1px solid rgba(245,158,11,.15)}
+.pay-card .pc-title{font-size:13px;font-weight:700;color:#92400e}
+.pay-card .pc-sub{font-size:10px;color:#a16207;margin:3px 0 8px}
+.pay-card .pc-price{font-size:24px;font-weight:800;color:#1a1d26;margin-bottom:8px}
+.pay-card .pc-btn{padding:8px 28px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+.pay-card .pc-btn:active{transform:scale(.97)}
+
+/* Lead section */
+.lead{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:14px;padding:18px 16px;margin:10px 0;text-align:center;color:#fff;position:relative;overflow:hidden}
+.lead::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.03)}
+.lead .l-title{font-size:14px;font-weight:700;margin-bottom:2px}
+.lead .l-sub{font-size:10px;color:rgba(255,255,255,.5);margin-bottom:10px}
+.lead-qr-row{display:flex;gap:20px;justify-content:center;align-items:center}
+.lead-qr{width:72px;height:72px;border-radius:10px;overflow:hidden;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-size:28px}
+.lead-qr-label{font-size:8px;color:rgba(255,255,255,.35);margin-top:3px;letter-spacing:.3px}
+
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);padding:10px 20px;border-radius:10px;background:#1a1d26;border:1px solid rgba(255,255,255,.06);font-size:12px;color:#fff;box-shadow:0 8px 32px rgba(0,0,0,.15);z-index:999;opacity:0;transition:all .4s;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .fi{animation:fadeIn .35s ease}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.loading{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
-<div class="topbar">
-  <div class="badge">✦ 英语能力测试</div>
-  <h1>英语水平测评</h1>
-  <p>10分钟测出你的真实英语水平</p>
-</div>
+<div class="bg"></div>
+<div class="bg-shape s1"></div>
+<div class="bg-shape s2"></div>
+<div class="bg-shape s3"></div>
+<div class="grid"></div>
+
 <div class="ct" id="app"></div>
 <div class="toast" id="toast"></div>
 
 <script>
-const BRAND_NAME = 'XX教育';
-const BRAND_SLOGAN = '专注英语教育 · 让学习更高效';
-
 const QUESTIONS = [
   {q:'She ___ to school by bus every day.',opts:['go','goes','going','went'],ans:1},
   {q:'Which word means "非常漂亮的"?',opts:['Ugly','Beautiful','Angry','Tired'],ans:1},
@@ -100,108 +140,121 @@ const QUESTIONS = [
   {q:'What is the synonym of "happy"?',opts:['Sad','Glad','Mad','Bad'],ans:1},
   {q:'They ___ playing football now.',opts:['is','am','are','be'],ans:2}
 ];
-
 const LABELS = ['A','B','C','D'];
-let name = '', cur = 0, answers = [], submitted = false;
-const A = document.getElementById('app');
+let name='',cur=0,answers=[];
+const A=document.getElementById('app');
 
-async function saveResult(data) {
-  try {
-    const res = await fetch('https://english-quiz-vercel.vercel.app/api/submissions', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) });
-    return await res.json();
-  } catch(e) { return { success: false }; }
-}
+async function saveResult(d){try{await fetch('https://english-quiz-vercel.vercel.app/api/submissions',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})}catch(e){}}
 
-function hm() {
-  answers = []; cur = 0; submitted = false;
-  A.innerHTML = `<div class="home fi">
-    <div class="card" style="text-align:center"><div class="card-hl"></div>
+function hm(){
+  answers=[];cur=0;
+  A.innerHTML=`<div class="fi" style="padding-top:8px">
+    <div class="brand-bar">
+      <div class="badge">✦ 英语能力测试</div>
+      <h1>英语水平测评</h1>
+      <p>15题 · 10分钟测出你的真实水平</p>
+    </div>
+    <div class="glass" style="text-align:center">
       <span class="home-icon">📝</span>
-      <div class="home-title">英语水平测试</div>
-      <div class="home-sub">15道题 · 测出你的真实水平</div>
-      <div class="home-features">
-        <div class="home-feat"><span class="hf-icon">📖</span>语法 · 词汇综合测评</div>
-        <div class="home-feat"><span class="hf-icon">⚡</span>约10分钟完成</div>
-        <div class="home-feat"><span class="hf-icon">📊</span>测试后获取详细分析报告</div>
+      <div class="home-title">开始测评</div>
+      <div class="home-sub">语法 · 词汇 · 阅读综合测试</div>
+      <div class="features" style="text-align:left">
+        <div class="feat"><span class="fi-icon">📖</span>15道精选英语选择题</div>
+        <div class="feat"><span class="fi-icon">⚡</span>约10分钟完成</div>
+        <div class="feat"><span class="fi-icon">📊</span>提交即出详细测评报告</div>
       </div>
     </div>
-    <div class="card"><div class="card-hl"></div>
+    <div class="glass">
       <div class="form-group">
-        <label>请输入你的姓名或昵称</label>
-        <input type="text" id="nameInput" placeholder="输入你的名字" maxlength="20" onkeydown="if(event.key==='Enter')startQuiz()"/>
+        <label>👤 输入你的姓名</label>
+        <input type="text" id="ni" placeholder="你的名字或昵称" maxlength="20" onkeydown="if(event.key==='Enter')sq()"/>
       </div>
-      <button class="btn btn-primary" onclick="startQuiz()">▶ 开始测试</button>
+      <button class="btn btn-primary" onclick="sq()">开始测试 →</button>
     </div>
   </div>`;
-  setTimeout(() => document.getElementById('nameInput')?.focus(), 300);
+  setTimeout(()=>document.getElementById('ni')?.focus(),300);
 }
 
-function startQuiz() {
-  name = document.getElementById('nameInput')?.value.trim() || '';
-  if (!name) { st('请先输入你的姓名'); return; }
-  cur = 0; answers = []; submitted = false; renderQ();
+function sq(){
+  name=(document.getElementById('ni')?.value||'').trim();
+  if(!name){st('请先输入你的姓名');return;}
+  cur=0;answers=[];rq();
 }
 
-function renderQ() {
-  if (cur >= QUESTIONS.length) return showResult();
-  const q = QUESTIONS[cur]; const c = cur + 1;
-  A.innerHTML = `<div class="card fi"><div class="card-hl"></div>
-    <div class="q-hd"><span class="q-num">第 ${c}/${QUESTIONS.length} 题</span><span class="q-num" style="background:transparent;color:#94a3b8">${Math.round(c/QUESTIONS.length*100)}%</span></div>
-    <div class="q-progress"><div class="qp-fill" style="width:${c/QUESTIONS.length*100}%"></div></div>
-    <div class="q-text">${q.q}</div>
-    <div class="q-opts">${q.opts.map((o,i) => '<button class="q-opt" onclick="pick('+i+')"><span class="ql">'+LABELS[i]+'</span>'+o+'</button>').join('')}</div>
+function rq(){
+  if(cur>=QUESTIONS.length)return sr();
+  const q=QUESTIONS[cur],c=cur+1;
+  A.innerHTML=`<div class="fi" style="padding-top:8px">
+    <div class="brand-bar" style="margin-bottom:12px">
+      <div class="badge">✦ 第 ${c}/${QUESTIONS.length} 题</div>
+    </div>
+    <div class="glass"><div class="card-hl"></div>
+      <div class="q-hd"><span class="q-num">⚡ ${Math.round(c/QUESTIONS.length*100)}% 完成</span><span class="q-num">💡 选错会显示正确答案</span></div>
+      <div class="q-progress"><div class="qp-fill" style="width:${c/QUESTIONS.length*100}%"></div></div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-opts">${q.opts.map((o,i)=>'<button class="q-opt" onclick="pk('+i+')"><span class="ql">'+LABELS[i]+'</span>'+o+'</button>').join('')}</div>
+    </div>
   </div>`;
 }
 
-function pick(i) {
-  const q = QUESTIONS[cur];
-  const btns = document.querySelectorAll('.q-opt');
-  btns.forEach(b => b.style.pointerEvents = 'none');
-  const isCorrect = i === q.ans;
-  btns[i].classList.add(isCorrect ? 'correct' : 'wrong');
-  btns[q.ans].classList.add('correct');
-  answers.push({ question: q.q, selected: i, correct: q.ans, isCorrect });
-  setTimeout(() => { cur++; cur >= QUESTIONS.length ? showResult() : renderQ(); }, 600);
+function pk(i){
+  const q=QUESTIONS[cur];
+  const b=document.querySelectorAll('.q-opt');
+  b.forEach(x=>x.style.pointerEvents='none');
+  const c=i===q.ans;
+  b[i].classList.add(c?'correct':'wrong');
+  b[q.ans].classList.add('correct');
+  answers.push({q:q.q,selexted:i,correct:q.ans,isCorrect:c});
+  setTimeout(()=>{cur++;cur>=QUESTIONS.length?sr():rq();},500);
 }
 
-function showResult() {
-  submitted = true;
-  const correct = answers.filter(a => a.isCorrect).length;
-  const pct = Math.round(correct / 15 * 100);
-  let level, levelLabel, levelClass, detail;
-  if (pct >= 80) { level='A'; levelLabel='优秀 🎉'; levelClass='r-level-A'; detail='你的英语基础非常扎实！建议继续保持，挑战更高难度。'; }
-  else if (pct >= 60) { level='B'; levelLabel='良好 👍'; levelClass='r-level-B'; detail='你有不错的英语基础，通过系统学习完全可以达到优秀水平。'; }
-  else if (pct >= 40) { level='C'; levelLabel='有待提高 💪'; levelClass='r-level-C'; detail='建议从核心语法和常用词汇入手，制定系统的学习计划。'; }
-  else { level='D'; levelLabel='基础薄弱 📚'; levelClass='r-level-D'; detail='建议从头系统学习，打好基础是关键。'; }
-  saveResult({ name, score: correct, total: 15, answers });
-  A.innerHTML = `<div class="result fi">
-    <div class="card" style="text-align:center"><div class="card-hl"></div>
-      <div class="r-score">${correct}/15</div>
-      <div class="r-score-label">答对题数</div>
-      <div class="r-badge ${levelClass}">${levelLabel}</div>
-      <div class="r-detail"><h4>📋 测评结果</h4><p>${detail}</p></div>
-      <div class="r-detail" style="border-left-color:#f59e0b"><h4>📊 正确率: ${pct}%</h4><p>答对 ${correct} 题 · 答错 ${15-correct} 题</p></div>
+function sr(){
+  const correct=answers.filter(a=>a.isCorrect).length;
+  const pct=Math.round(correct/15*100);
+  let lv,lb,lc,d;
+  if(pct>=80){lv='A';lb='优秀';lc='r-level-A';d='你的英语基础非常扎实！词汇和语法掌握得很好，继续保持，挑战更高难度。';}
+  else if(pct>=60){lv='B';lb='良好';lc='r-level-B';d='你有不错的英语基础，在细节上还有提升空间，通过系统学习完全可以达到优秀水平。';}
+  else if(pct>=40){lv='C';lb='有待提高';lc='r-level-C';d='建议从核心语法和常用词汇入手，制定系统的学习计划，逐步提升。';}
+  else{lv='D';lb='基础薄弱';lc='r-level-D';d='英语基础比较薄弱，建议从头系统学习，打好基础是关键。'}
+  saveResult({name,score:correct,total:15,answers});
+  A.innerHTML=`<div class="fi" style="padding-top:8px">
+    <div class="brand-bar">
+      <div class="badge">✦ 测评完成</div>
+      <h1 style="font-size:18px">${name} 的成绩</h1>
     </div>
-    <div class="card" style="background:linear-gradient(135deg,#fef3c7,#fde68a);text-align:center">
-      <div style="font-size:15px;font-weight:700;color:#92400e">🔓 解锁完整分析报告</div>
-      <div style="font-size:11px;color:#a16207;margin:4px 0 12px">获取每道题的详细解析 + 专属学习建议</div>
-      <div style="font-size:28px;font-weight:800;color:#1a2332;margin-bottom:8px">¥9.9</div>
-      <button class="btn btn-primary" onclick="st('🔒 付费功能已预留 — 接入微信支付即可使用')">立即解锁完整报告</button>
+    <div class="glass" style="text-align:center">
+      <div class="r-score-wrap">
+        <div><div class="r-score">${correct}</div><div class="r-score-label">/ ${total} 题</div></div>
+      </div>
+      <div class="r-badge ${lc}">${lb}</div>
+      <div style="font-size:11px;color:var(--text2);margin-bottom:6px">正确率 ${pct}%</div>
+      <div class="r-detail" style="border-left-color:var(--accent)">
+        <h4>📋 测评结论</h4>
+        <p>${d}</p>
+      </div>
     </div>
-    <div class="lead-card">
-      <div class="lc-title">📲 扫码加老师微信</div>
-      <div class="lc-sub">获取专属英语学习方案 · 免费试听课</div>
+    <div class="pay-card">
+      <div class="pc-title">🔓 解锁完整分析报告</div>
+      <div class="pc-sub">每道题详细解析 + 个性化学习建议</div>
+      <div class="pc-price">¥9.9</div>
+      <button class="pc-btn" onclick="st('付费功能已预留 — 接入微信支付即可使用')">立即解锁</button>
+    </div>
+    <div class="lead">
+      <div class="l-title">📲 扫码咨询 · 获取学习方案</div>
+      <div class="l-sub">免费试听课 · 专属英语提升计划</div>
       <div class="lead-qr-row">
-        <div><div class="lead-qr" style="background:#fff;display:flex;align-items:center;justify-content:center;font-size:32px">🌐</div><div class="lead-qr-label">扫码测试</div></div>
-        <div><div class="lead-qr" style="background:#fff;display:flex;align-items:center;justify-content:center;font-size:32px">💬</div><div class="lead-qr-label">加企微</div></div>
+        <div><div class="lead-qr">🌐</div><div class="lead-qr-label">扫码测试</div></div>
+        <div><div class="lead-qr">💬</div><div class="lead-qr-label">加微信</div></div>
       </div>
-      <div style="font-size:9px;color:rgba(255,255,255,.4);margin-top:8px;letter-spacing:.5px">${BRAND_SLOGAN}</div>
+      <div style="font-size:7px;color:rgba(255,255,255,.25);margin-top:6px;letter-spacing:.5px">专注英语教育 · 让学习更高效</div>
     </div>
-    <div class="card" style="text-align:center"><button class="btn btn-second" onclick="hm()">🔄 再测一次</button></div>
+    <div class="glass" style="text-align:center;padding:14px">
+      <button class="btn btn-second" onclick="hm()" style="padding:8px">🔄 再测一次</button>
+    </div>
   </div>`;
 }
 
-function st(m) { const t=document.getElementById('toast'); if(!t)return; t.textContent=m; t.classList.add('show'); clearTimeout(window._tt); window._tt=setTimeout(()=>t.classList.remove('show'),2500); }
+function st(m){const t=document.getElementById('toast');if(!t)return;t.textContent=m;t.classList.add('show');clearTimeout(window._tt);window._tt=setTimeout(()=>t.classList.remove('show'),2500);}
 hm();
 </script>
 </body>
